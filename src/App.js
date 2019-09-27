@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PlayNumber from './PlayNumber';
 import StarsDisplay from './StarsDisplay';
+import PlayAgain from './PlayAgain';
 import utils from './utils';
 import logo from './logo.svg';
 import './App.css';
@@ -13,6 +14,13 @@ function App() {
   const [candidateNums, setCandidateNums] = useState([]);
 
   const candidatesAreWrong = utils.sum(candidateNums) > stars;
+  const gameIsDone = availableNums.length === 0;
+
+  const resetGame = () => {
+    setStars(utils.random(1, 9));
+    setAvailableNums(utils.range(1, 9));
+    setCandidateNums([]);
+  }
 
   //arrow function
   const numberStatus = (number) => {
@@ -55,7 +63,9 @@ function App() {
 
         <div className="left">
 
-          <StarsDisplay count={stars} />
+          {
+            gameIsDone ? (<PlayAgain onClick={resetGame} />) : (<StarsDisplay count={stars} />)
+          }
 
         </div>
 
