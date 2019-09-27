@@ -4,10 +4,28 @@ import StarsDisplay from './StarsDisplay';
 import utils from './utils';
 import logo from './logo.svg';
 import './App.css';
+import { statSync } from 'fs';
 
 function App() {
 
   const [stars, setStars] = useState(utils.random(1, 9));
+  const [availableNums, setAvailableNums] = useState(utils.range(1, 9));
+  const [candidateNums, setCandidateNums] = useState([]);
+
+  const candidatesAreWrong = utils.sum(candidateNums) > stars;
+
+  //arrow function
+  const numberStatus = (number) => {
+    if (!availableNums.includes(number)) {
+      return 'used';
+    }
+
+    if (candidateNums.includes(number)) {
+      return candidatesAreWrong ? 'wrong' : 'candidate';
+    }
+
+    return 'available';
+  }
 
   return (
     <div className="game">
@@ -25,7 +43,10 @@ function App() {
         <div className="right">
           {utils.range(1, 9).map(number =>
 
-            <PlayNumber key={number} number={number} />
+            <PlayNumber
+              key={number}
+              status={numberStatus(number)}
+              number={number} />
 
           )}
         </div>
@@ -36,13 +57,6 @@ function App() {
   );
 }
 
-// Color Theme
-const colors = {
-  available: 'lightgray',
-  used: 'lightgreen',
-  wrong: 'lightcoral',
-  candidate: 'deepskyblue',
-};
 
 
 
