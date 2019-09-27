@@ -1,5 +1,5 @@
 import React from 'react';
-import buttonColors from './constansts'
+import buttonColors from '../constansts'
 
 function PlayNumber(props) {
 

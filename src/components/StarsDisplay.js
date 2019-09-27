@@ -1,5 +1,5 @@
 import React from 'react';
-import utils from './utils';
+import utils from '../math-utils'; 
 
 function StarsDisplay(props) {
 

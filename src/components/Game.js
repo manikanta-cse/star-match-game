@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PlayNumber from './PlayNumber';
 import StarsDisplay from './StarsDisplay';
 import PlayAgain from './PlayAgain';
-import useGameState from "./GameState";
-import utils from './utils';
-import logo from './logo.svg';
-import './App.css';
-import { statSync } from 'fs';
+import useGameState from "../GameState";
+import utils from '../math-utils';
+import '../App.css';
 
 function Game(props) {
 
@@ -15,12 +13,6 @@ function Game(props) {
   const candidatesAreWrong = utils.sum(candidateNums) > stars;
 
   const gameStatus = availableNums.length === 0 ? 'won' : secondsLeft === 0 ? 'lost' : 'active';
-
-  // const resetGame = () => {
-  //   setStars(utils.random(1, 9));
-  //   setAvailableNums(utils.range(1, 9));
-  //   setCandidateNums([]);
-  // }
 
   //arrow function
   const numberStatus = (number) => {
