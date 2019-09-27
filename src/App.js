@@ -27,6 +27,25 @@ function App() {
     return 'available';
   }
 
+  const onNumberClick = (number, currentStatus) => {
+
+    if (currentStatus == 'used') {
+      return;
+    }
+
+    //candidateNums
+    const newCandidateNums = currentStatus == 'available' ? candidateNums.concat(number) : candidateNums.filter(cn => cn !== number);
+
+    if (utils.sum(newCandidateNums) !== stars) {
+      setCandidateNums(newCandidateNums);
+    } else {
+      const newAvailableNums = availableNums.filter(n => !newCandidateNums.includes(n));
+      setStars(utils.randomSumIn(newAvailableNums, 9));
+      setAvailableNums(newAvailableNums);
+      setCandidateNums([]);
+    }
+  }
+
   return (
     <div className="game">
       <div className="help">
@@ -46,7 +65,8 @@ function App() {
             <PlayNumber
               key={number}
               status={numberStatus(number)}
-              number={number} />
+              number={number}
+              onClick={onNumberClick} />
 
           )}
         </div>
