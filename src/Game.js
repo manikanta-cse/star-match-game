@@ -7,7 +7,7 @@ import logo from './logo.svg';
 import './App.css';
 import { statSync } from 'fs';
 
-function App() {
+function Game(props) {
 
   const [stars, setStars] = useState(utils.random(1, 9));
   const [availableNums, setAvailableNums] = useState(utils.range(1, 9));
@@ -78,7 +78,7 @@ function App() {
         <div className="left">
 
           {
-            gameStatus !== 'active' ? (<PlayAgain onClick={resetGame} gameStatus={gameStatus} />) : (<StarsDisplay count={stars} />)
+            gameStatus !== 'active' ? (<PlayAgain onClick={props.startNewGame} gameStatus={gameStatus} />) : (<StarsDisplay count={stars} />)
           }
 
         </div>
@@ -104,4 +104,4 @@ function App() {
 
 
 
-export default App;
+export default Game;
